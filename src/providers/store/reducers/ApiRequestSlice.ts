@@ -4,6 +4,7 @@ import {useHttp} from "../../../hooks/http.hook";
 
 const initialState: IApiRequest = {
     data: [],
+    teachers: [],
     error: '',
     isLoading: false
 }
@@ -20,7 +21,11 @@ export const fetchData = createAsyncThunk(
 export const apiRequestSlice = createSlice({
     name: 'apiRequest',
     initialState,
-    reducers: {},
+    reducers: {
+        changeTeacher(state, action: PayloadAction<any>) { //тоже потом поменяй any
+            state.data[0].exam = action.payload;
+        },
+    },
     extraReducers:
         (builder) => {
             builder
@@ -28,7 +33,8 @@ export const apiRequestSlice = createSlice({
                 .addCase(fetchData.fulfilled, (state,action: PayloadAction<any>) => {//поменяй тип(типизировать приходящие объекты с апишки)
                     state.isLoading = false;
                     state.error = '';
-                    state.data = action.payload;
+                    state.data = action.payload.data;
+                    state.teachers = action.payload.teachers
                 })
                 .addCase(fetchData.rejected, (state) => {
                     state.isLoading = false;

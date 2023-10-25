@@ -1,0 +1,17 @@
+.card-wrapper {
+  border: black solid 1px;
+  width: 700px;
+}
+table {
+  margin: 5px;
+  border-collapse: collapse;
+  //width: 100%;
+}
+
+th, td {
+  border: 1px solid black;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
